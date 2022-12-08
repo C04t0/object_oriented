@@ -17,10 +17,14 @@ public class Flight {
             isSeatAvailable[i] = true;
         }
     }
-    public void Flight(int a) {
-        seats = 150;
-        passengers = 0;
+
+    public Flight() {
     }
+
+    public Flight(int flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
     public void addOnePassenger() {
         if (hasSeating()) {
             passengers += 1;
@@ -108,11 +112,15 @@ public class Flight {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Flight) {
-            Flight flight = (Flight) o;
-            return flight.getFlightNumber() == this.flightNumber;
+        if(super.equals(o)) {
+            return true;
         }
-        return false;
+
+        if (!(o instanceof Flight)) {
+            return false;
+        }
+        Flight flight = (Flight) o;
+        return flight.getFlightNumber() == this.flightNumber;
     }
 
     public void addPassengers(Passenger... passengerList) {

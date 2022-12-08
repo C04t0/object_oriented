@@ -1,9 +1,5 @@
 package object_oriented;
 
-import Calculations.Adder;
-import Calculations.CalculateBase;
-import Calculations.Divider;
-
 public class Main {
     public static void main(String[] args) {
        /* Flight nycToLv = new Flight();
@@ -96,7 +92,7 @@ public class Main {
         Passenger luc = new Passenger(1, 2);
 
         f9.addPassengers(oscar, bjorn, luc);
-        */
+
 
         Cargoflight cFlight = new Cargoflight();
         cFlight.addOnePackage(1.0f, 2.5f, 3.0f);
@@ -149,5 +145,69 @@ public class Main {
         calc.setRightVal(rightVal);
         calc.calculate();
     }
+    */
+     Flight f1 = new Flight(175);
+     Flight f2 = new Flight(175);
+
+     if (f1.equals(f2)) {
+      System.out.println("equal flightnumber");
+     }
+
+     Flight f3 = new Flight();
+     Flight f4 = f3;
+
+     f3.addOnePassenger();
+     Pilot pilot = new CargoOnlyPilot();
+     pilot.fly(f4);
+
+     Cargoflight cf294 = new Cargoflight(294);
+     Cargoflight cf85 = new Cargoflight(85, 2000f);
+     Cargoflight cf = new Cargoflight();
+     Cargoflight bcf78 = new Cargoflight(5000f);
+
+
+     FlightCrewJob job1 = FlightCrewJob.PILOT;
+     FlightCrewJob job2 = FlightCrewJob.FLIGHT_ATTENDANT;
+
+     if (job1 == FlightCrewJob.PILOT) {
+      System.out.println("is pilot");
+     }
+        CrewMember tom = new CrewMember(FlightCrewJob.CO_PILOT, "Tom");
+        CrewMember olivier = new CrewMember(FlightCrewJob.FLIGHT_ATTENDANT, "Olivier");
+
+        whoIsInCharge(tom, olivier);
+
+        FlightCrewJob[] naam = FlightCrewJob.values();
+        for(FlightCrewJob job : naam) {
+            System.out.println(job.name());
+        }
+
+        FlightCrewJob parsedEnum = FlightCrewJob.valueOf("PILOT");
+        System.out.println(parsedEnum);
+    }
+    public enum FlightCrewJob {
+     FLIGHT_ATTENDANT,
+     CO_PILOT,
+     PILOT
+    }
+    public void displayJobResponsibilities(FlightCrewJob job) {
+      switch(job) {
+      case FLIGHT_ATTENDANT:
+       System.out.println("Assures passengers safety.");
+       break;
+      case CO_PILOT:
+       System.out.println("Assists in flying the plane.");
+       break;
+      case PILOT:
+       System.out.println("Flies the plane");
+       break;
+      }
+    }
+    private static void whoIsInCharge(CrewMember member1, CrewMember member2) {
+        CrewMember theBoss = (member1.getJob().compareTo(member2.getJob()) > 0 ? member1 : member2);
+        System.out.println("The boss is: " + theBoss);
+    }
+
+
 
 }

@@ -1,6 +1,6 @@
 package object_oriented;
 
-public class Passenger {
+public final class Passenger {
     private int freeBags;
     private int CheckBags;
     private double perBagFee;

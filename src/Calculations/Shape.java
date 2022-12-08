@@ -6,12 +6,11 @@ create a subclass named Rectangle, Circle and Triangle.
  */
 
 
-public class Shape {
+public abstract class Shape {
     private double h;
     private double w;
 
-    public void area() {
-    }
+    public abstract void area();
 
     public double getH() {
         return h;
