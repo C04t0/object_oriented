@@ -1,5 +1,8 @@
 package object_oriented;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
 public class Main {
     public static void main(String[] args) {
        /* Flight nycToLv = new Flight();
@@ -184,30 +187,46 @@ public class Main {
 
         FlightCrewJob parsedEnum = FlightCrewJob.valueOf("PILOT");
         System.out.println(parsedEnum);
-    }
-    public enum FlightCrewJob {
-     FLIGHT_ATTENDANT,
-     CO_PILOT,
-     PILOT
+
+        Passenger[] passengers = {                                              //nieuwe passenger array
+                new Passenger("Bjorn", 1, 180),
+                new Passenger("Luc", 1, 90),
+                new Passenger("Kenny", 3, 730),
+                new Passenger("Oscar", 2, 150),
+        };
+        Arrays.sort(passengers);
+        for(Passenger p: passengers) {
+            System.out.println(p.getName());
+        }
+
+        Flight flight = new Flight();
+        flight.addOnePassenger(passengers[0]);
+        flight.addOnePassenger(passengers[1]);
+
+        for (Passenger p : flight) {               //dit kan je gewoon zo schrijven, onderstaande code is wat er gebeurt
+            System.out.println(p.getName());
+        }
+
+        Iterable<Passenger> temp = flight;
+        Iterator<Passenger> iterator = temp.iterator();      //dit gebeurt achter de schermen van het iterator object
+
+        while(iterator.hasNext()) {
+            Passenger p = iterator.next();
+            System.out.println(p.getName());
+        }
     }
     public void displayJobResponsibilities(FlightCrewJob job) {
       switch(job) {
-      case FLIGHT_ATTENDANT:
+      case FLIGHT_ATTENDANT ->
        System.out.println("Assures passengers safety.");
-       break;
-      case CO_PILOT:
+      case CO_PILOT ->
        System.out.println("Assists in flying the plane.");
-       break;
-      case PILOT:
+      case PILOT ->
        System.out.println("Flies the plane");
-       break;
       }
     }
     private static void whoIsInCharge(CrewMember member1, CrewMember member2) {
         CrewMember theBoss = (member1.getJob().compareTo(member2.getJob()) > 0 ? member1 : member2);
-        System.out.println("The boss is: " + theBoss);
+        System.out.println("The boss is: " + theBoss.getJob().getTitle() + " " + theBoss.getName());
     }
-
-
-
 }

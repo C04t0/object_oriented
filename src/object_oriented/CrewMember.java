@@ -1,7 +1,5 @@
 package object_oriented;
 
-import object_oriented.Main.FlightCrewJob;
-
 public class CrewMember {
     private FlightCrewJob job;
     private String name;

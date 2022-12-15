@@ -1,12 +1,16 @@
 package object_oriented;
 
-public class Flight {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Flight implements Comparable<Flight>, Iterable<Passenger> {
     private int passengers, totalCheckedBags;                        //fields (variabelen van object)
     private static int allPassengers, maxPassPerFLight;
     private int seats = 150;                       //constructor + initialisatie
     private int flightNumber;
     private char flightClass;
     private boolean[] isSeatAvailable = new boolean[seats];
+    private ArrayList<Passenger> passengerList = new ArrayList<>();
 
     static {
         maxPassPerFLight = 80;
@@ -39,8 +43,9 @@ public class Flight {
             totalCheckedBags += bags;
         }
     }
-    public void addOnePassenger(Passenger p) {
-        addOnePassenger(p.getCheck());
+    public void addOnePassenger(Passenger passengerObject) {
+        addOnePassenger(passengerObject.getCheck());
+        passengerList.add(passengerObject);
     }
     public void addOnePassenger(int bags, int carryOn) {
         if(carryOn <= 2) {
@@ -109,20 +114,17 @@ public class Flight {
     public int getTotalCheckedBags() {
         return totalCheckedBags;
     }
-
     @Override
     public boolean equals(Object o) {
         if(super.equals(o)) {
             return true;
         }
-
         if (!(o instanceof Flight)) {
             return false;
         }
         Flight flight = (Flight) o;
         return flight.getFlightNumber() == this.flightNumber;
     }
-
     public void addPassengers(Passenger... passengerList) {
         if(hasSeating(passengerList.length)) {
             passengers += passengerList.length;
@@ -130,6 +132,14 @@ public class Flight {
                 totalCheckedBags += p.getCheck();
             }
         }
+    }
+    @Override
+    public int compareTo(Flight o) {
+        return 0;
+    }
+    @Override
+    public Iterator<Passenger> iterator() {
+        return passengerList.iterator();
     }
 }
 
